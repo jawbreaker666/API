@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        async function getSynonyms(){
+            let url = 'https://www.openthesaurus.de/synonyme/search?q=test&format=application/json'; //Seite
+            let response = await fetch(url); //warten
+            console.log('Response is', response);
+
+        }
+
+
+    
+
+    </script>
+</head>
+
+
+<body>
+
+    <button onclick="getSynonyms()">Get Synonyms</button>
+
+    
+</body>
+</html>
