@@ -6,14 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <script>
 
-        async function getSynonyms(){
-            let url = 'https://www.openthesaurus.de/synonyme/search?q=test&format=application/json'; //Seite
+
+    <script> // API'S = SCHNITTSTELLE , öffentliche Daten abrufen (runteraden)
+
+            async function getSynonyms(){
+            let query = document.getElementById('searchQuery').value;
+            let url = `https://www.openthesaurus.de/synonyme/search?q=${query}&format=application/json`; //Seite
             let response = await fetch(url); //warten
-            let responseAsJson = await response.json();
+            let responseAsJson = await response.json(); //JSON wird auf einem Server gespeichert
             console.log('Response is', responseAsJson);
-            let synsets = responseAsJson['synsets'];
+            let synsets = responseAsJson['synsets'];  // synset = bildung von Wortfeldern =ID, Kategorie,Terms
             renderSynsets(synsets);
             }
 
@@ -23,9 +26,9 @@
             container.innerHTML =
              `<div>Es wurden <b>${synsets.length}</b> Synonym-Sets geladen.</div>`;
 
-             for (let i = 0; i < synsets.length; i++) {
+             for (let i = 0; i < synsets.length; i++) { // mit einer Forschleife stellt man die HTML Elemente da
                  const synset = synsets[i];
-                 let terms = synset['term']; // Ist ein Array
+                 let terms = synset['terms']; // Ist ein Array = Block der Wörter, term = einzelne Wörter
 
                  container.innerHTML += `<h2>Synonym-Set mit ID ${synset['id']}</h2>`;
 
@@ -49,6 +52,8 @@
 
 
 <body>
+
+    <input type="text" id="searchQuery">
 
     <button onclick="getSynonyms()">Get Synonyms</button>
 
