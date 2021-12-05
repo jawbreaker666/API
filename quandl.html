@@ -10,8 +10,10 @@
         const API_KEY = '2bdyk1GAcpV61WZwcniC';
 
         async function loadCourse(){
-            let startDate = '2021-04-06';
-            let endDate = '2021-04-06';  
+            let today = new Date(); //aktuelles Datum
+            today.setDate(new Date().getDate() - 1); //Tag verändern, 1 Tag abziehen
+            let startDate = today.toISOString().split('T')[0];
+            let endDate = today.toISOString().split('T')[0];
             let url = `https://data.nasdaq.com/api/v3/datasets/BITFINEX/LUNAF0USTF0?start_date=${startDate}&end_date=${endDate}&api_key=${API_KEY}`; //Seite
             let response = await fetch(url); //warten
             let responseAsJson = await response.json(); //JSON wird auf einem Server gespeichert
